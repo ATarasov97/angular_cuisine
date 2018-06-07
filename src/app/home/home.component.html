@@ -1,0 +1,20 @@
+<div class="main-container">
+  <form class="main-form">
+    <div class="form-group">
+      <label for="cuisine" class="cuisine-label">Cuisine:</label>
+      <select [disabled]="loading" *ngIf="cuisines" name="cuisines" id="cuisine" [(ngModel)]="selectedCuisine" class="form-select" (change)="onSelectCuisine($event.target.value)">
+        <option value="0" disabled>Select</option>
+        <option *ngFor="let cuisine of cuisines" value="{{cuisine.id}}">{{cuisine.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dishes" class="dishes-label">Dishes:</label>
+      <select [disabled]="loading || !selectedCuisine" name="dishes" id="dishes"  class="form-select">
+        <option *ngFor="let dish of showedDishes" value="{{dish.id}}">{{dish.name}}</option>
+      </select>
+    </div>
+  </form>
+  <div class="loading" *ngIf="loading">
+    <img class="loading-image" src="./assets/images/spinner.gif" alt="Loading...">
+  </div>
+</div>
